@@ -1,7 +1,7 @@
  &control
     calculation = 'bands',
     verbosity = 'high',
-    pseudo_dir = '../../files/pseudo'
+    pseudo_dir = '../../../files/pseudo'
     outdir='./tmp'
     restart_mode='from_scratch'
     verbosity = 'high',
