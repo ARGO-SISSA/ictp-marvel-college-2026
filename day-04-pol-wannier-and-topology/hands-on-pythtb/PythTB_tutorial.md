@@ -165,7 +165,7 @@ hal.visualize()
 `plot_bands` accepts a list of high-symmetry $k$-nodes in reduced coordinates and an optional `proj_orb_idx` that colors each band by its projection onto a chosen orbital,
 
 $$
-P_n(k) = \sum_{i \in \text{proj\\_orb\\_idx}} |\langle \psi_n(k) | \phi_i \rangle|^2.
+P_n(k) = \sum_{i \in \text{proj\_orb\_idx}} |\langle \psi_n(k) | \phi_i \rangle|^2.
 $$
 
 The sublattice that dominates the occupied band near the gap determines whether the bands are inverted.
