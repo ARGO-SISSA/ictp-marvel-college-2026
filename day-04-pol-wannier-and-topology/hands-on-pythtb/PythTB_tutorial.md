@@ -162,13 +162,13 @@ hal.visualize()
 
 ### Task 2: Band structure and band inversion
 
-`plot_bands` accepts a list of high-symmetry $k$-nodes in reduced coordinates and an optional `proj_orb_idx` that colors each band by its projection onto a chosen orbital,
+`plot_bands` accepts a list of high-symmetry $k$-nodes in reduced coordinates and an optional `proj_orb_idx` that colors each band by its projection onto a chosen set of orbitals,
 
 $$
-P_n(k) = \sum_{i \in \text{proj\_orb\_idx}} |\langle \psi_n(k) | \phi_i \rangle|^2.
+P_n(k) = \sum_{i \in \text{proj}} |\langle \psi_n(k) | \phi_i \rangle|^2.
 $$
 
-The sublattice that dominates the occupied band near the gap determines whether the bands are inverted.
+where "proj" is the list of orbitals defined in `proj_orb_idx`. The sublattice that dominates the occupied band near the gap determines whether the bands are inverted.
 
 ```python
 k_nodes = [[0, 0], [2/3, 1/3], [1/2, 1/2], [1/3, 2/3], [0, 0]]
@@ -192,7 +192,7 @@ hal.plot_bands(
 
 The workflow follows the same pattern as the primer. We build a 2D mesh, create and solve a `WFArray` on it, and then call `berry_phase` to integrate along $k_x$ — which returns one Berry phase per $k_y$ point on the mesh.
 
-1. `mesh = Mesh(["k", "k"])`, then `mesh.build_grid(shape=(51, 51))`.
+1. `mesh = Mesh(["k", "k"])`, then `mesh.build_grid(shape=(50, 50))`.
 2. `wfa = WFArray(hal.lattice, mesh)` and `wfa.solve_model(hal)`.
 3. `phases = wfa.berry_phase(axis_idx=0, state_idx=[0])`.
 4. `xbar = phases / (2 * np.pi)`.
@@ -320,7 +320,6 @@ The pipeline is the same as the one we just used for Haldane, but the model is s
 3. Compute the Wilson-loop eigenphases with `berry_phase(..., berry_evals=True)`. What should `state_idx` be in this case? How many occupied bands are there? 
 
 > **Tip**: `state_idx` is a list of band indices. The states are indexed in order of energy, so the lowest energy state is indexed as `0`, the next one as `1`, and so on.
-
 
 4. Translate the eigenphases to HWCCs and define them as the variable `centers` for the next step.
 
